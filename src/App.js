@@ -17,21 +17,25 @@ function App() {
   }, []);
 
   const start = () => {
-    stop();
-    setTimer(setInterval(() => {
-      setTime(prevValue => prevValue + 1);
-    }, 1))
+    if (!timer) {
+      console.log('start');
+      setTimer(setInterval(() => {
+        setTime(prevValue => prevValue + 1);
+      }, 1))
+    }
   }
 
   const stop = () => {
     if (timer) {
       clearInterval(timer);
+      setTimer(null);
     }
   }
 
   const reset = () => {
     if (timer) {
-      clearInterval(timer)
+      clearInterval(timer);
+      setTimer(null);
     }
     setTime(0);
   }
